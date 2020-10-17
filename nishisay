@@ -67,7 +67,7 @@ maxWidth = 35
 #setting options#
 #################
 
-##determining options
+#determining options
 forcePipe = think = wrapping = force = colorDisabled = False
 nextIterWidth = nextIterMod = False
 textSupplied = False
@@ -119,16 +119,16 @@ for i in argv[1:]:
 
     textOffset += 1
 
-##setting width to max if not specified
+#setting width to max if not specified
 try: width
 except:
     width = maxWidth
 
-##turning on text wrapping if text supplied as argument
+#turning on text wrapping if text supplied as argument
 if textSupplied and not "\\n" in " ".join(argv[textOffset:]):
     wrapping = True
 
-##configuring asciiart
+#configuring asciiart
 try: modsEnabled
 except:
     asciiart = baseAsciiart
@@ -156,11 +156,11 @@ else:
 #fetching text#
 ###############
 
-##fetching text from arguments
+#fetching text from arguments
 if textSupplied:
     text = " ".join(argv[textOffset:]).split("\\n")
 
-##if no text supplied in arguments
+#if no text supplied in arguments
 def usageMsg():
     print("Usage: nishisay [optionn]... [text]")
     print("This program comes with " + chr(0x1B) + "[38;5;196mABSOLUTELY NO" \
@@ -186,15 +186,15 @@ def usageMsg():
     _exit(0)
 
 if not textSupplied and not forcePipe:
-    ##prinring usage message after a set time (I am so fucking smart :3)
+    #prinring usage message after a set time (I am so fucking smart :3)
     usageMsgTimer = Timer(0.1, usageMsg)
     usageMsgTimer.start()
-    ##awaiting for text on stdin (peek() is blocking) and cancelling timer asap
+    #awaiting for text on stdin (peek() is blocking) and cancelling timer asap
     stdin.buffer.peek(1)
     usageMsgTimer.cancel()
     text = stdin.read().splitlines()
 
-##-p specified
+#-p specified
 if forcePipe:
     text = stdin.read().splitlines()
 
@@ -208,32 +208,32 @@ if not force:
         print("Error: No text Supplied.")
         _exit(1)
 
-##wrapping text
+#wrapping text
 if wrapping:
     textTmp = text
     text = []
     for i in textTmp:
         text.extend(wrap(i, width))
 
-##calculating width
+#calculating width
 width = max(len(i) for i in text)
 
 ####################
 #printing (finally)#
 ####################
 
-##printing top line
+#printing top line
 stdout.write(" _")
 for i in range(0, width):
     stdout.write('_')
 stdout.write("_")
 
-##printing one line of text
+#printing one line of text
 if len(text) == 1:
     stdout.write("   " + asciiart[0] + "\n")
     stdout.write("< " + text[0] + " >  " + asciiart[1] + "\n")
 
-##printing multiple lines of text
+#printing multiple lines of text
 elif len(text) > 1:
     stdout.write("\n")
     for i in range(0, len(text)):
@@ -266,6 +266,6 @@ else:
     stdout.write("o " + asciiart[2] + "\n" + \
                  spacing + "     o" + asciiart[3] + "\n")
 
-##printing rest of asciiart
+#printing rest of asciiart
 for i in range(4,len(asciiart)):
     stdout.write(spacing + asciiart[i] + "\n")
