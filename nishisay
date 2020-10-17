@@ -168,12 +168,12 @@ def usageMsg():
         + "\napplicable law.")
     print("Options:")
     print("  -t -> think")
-    print("  -a -> specify what modifications to apply to the base asciiart " \
+    print("  -m -> specify what modifications to apply to the base asciiart " \
         + "(seperated by \n" \
           "        a plus sign, start with the ones that do the most changes " 
           + "first)")
     print("  -n -> toggle word wrapping")
-    print("  -m [number] -> set max line length for word wrapping")
+    print("  -w [number] -> set the width for word wrapping")
     #print("  -f force")
     print("  -c -> disable color (todo)")
     print("  -p -> force reading from pipe")
