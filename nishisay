@@ -180,12 +180,13 @@ def usageMsg():
     print("Usage examples:")
     print("  -> nishisay XD")
     print("  -> figlet XD | nishisay")
+    print("  -> nishisay -m uwu uwu")
     print("  -> cat file.txt | nishisay -n")
     print('  -> nishisay "Hi, \\nhow are you?"')
     _exit(0)
 
 if not textSupplied and not forcePipe:
-    ##prinring usagr messagr after a set time (I am so fucking smart :3)
+    ##prinring usage message after a set time (I am so fucking smart :3)
     usageMsgTimer = Timer(0.1, usageMsg)
     usageMsgTimer.start()
     ##awaiting for text on stdin (peek() is blocking) and cancelling timer asap
