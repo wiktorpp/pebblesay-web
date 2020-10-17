@@ -1,4 +1,4 @@
-To install this program type:
+To install this program open terminal, navigate to this folder, and type:
 
     sudo cp nishisay /usr/bin
     sudo chmod +x /usr/bin/nishisay
