@@ -155,7 +155,7 @@ else:
                     #replacing line with the mod
                     asciiart[line] = i[line]
                 else:
-                    #defaulting to the base asciiart
+                    #defaulting to the base asciiart if *
                     asciiart[line] = baseAsciiart[line]
         line += 1
 
