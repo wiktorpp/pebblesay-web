@@ -78,6 +78,7 @@ forcePipe = think = wrapping = force = colorDisabled = False
 nextIterWidth = nextIterMod = False
 textSupplied = False
 textOffset = 1
+modsEnabled = []
 for i in argv[1:]:
 
     #setting width
@@ -97,7 +98,7 @@ for i in argv[1:]:
         continue
 
     if nextIterMod:
-        modsEnabled = i.split("+")
+        modsEnabled.extend(i.split("+"))
         nextIterMod = False
         textOffset += 1
         continue
@@ -142,12 +143,12 @@ except:
 else:
     for modName in modsEnabled:
         mod = mods.get(modName)
-        lineNum = 0
+        lineIndex = 0
         for line in mod:
             if line != "*":
                 #replacing line with the mod
-                asciiart[lineNum] = line
-            lineNum +=1
+                asciiart[lineIndex] = line
+            lineIndex +=1
 
 ###############
 #fetching text#
