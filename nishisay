@@ -33,7 +33,7 @@ baseAsciiart = [
                 "      \\      |    |   /",
                 "       \\_____\\___/___/",
 ]
-mod = {
+mods = {
     "imgNoColor" : [
                           "     /|_   ___/|",
                           "    / __\\_/    |",
@@ -135,28 +135,19 @@ if textSupplied and not "\\n" in " ".join(argv[textOffset:]):
     wrapping = True
 
 #configuring asciiart
+asciiart = baseAsciiart
 try: modsEnabled
 except:
-    asciiart = baseAsciiart
+    pass
 else:
-    asciiart = []
-    line = 0
-    while line < len(baseAsciiart):
-        asciiart.append("")
-        for modName in modsEnabled:
-            i = mod.get(modName)
-            try: i[line]
-            except:
-                #the mod array ended or is invalid
-                asciiart[line] = baseAsciiart[line]
-            else:
-                if i[line] != "*":
-                    #replacing line with the mod
-                    asciiart[line] = i[line]
-                else:
-                    #defaulting to the base asciiart if *
-                    asciiart[line] = baseAsciiart[line]
-        line += 1
+    for modName in modsEnabled:
+        mod = mods.get(modName)
+        lineNum = 0
+        for line in mod:
+            if line != "*":
+                #replacing line with the mod
+                asciiart[lineNum] = line
+            lineNum +=1
 
 ###############
 #fetching text#
