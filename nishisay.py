@@ -171,16 +171,16 @@ if textSupplied:
 
 #if no text supplied in arguments
 def usageMsg():
-    print("Usage: nishisay [options] <text>")
-    print("This program comes with " + chr(0x1B) + "[38;5;196mABSOLUTELY NO" \
+    print("Usage: nishisay [option]... [-m \033[4mmods\033[0m] " + \
+        "[\033[4mmessage\033[0m]")
+    print("This program comes with " + chr(0x1B) + "[38;5;196mABSOLUTELY NO " \
         + "WARRANTY" + chr(0x1B) + "[39m, to the extent permitted by "\
         + "\napplicable law.")
     print("Options:")
     print("  -t -> think")
     print("  -m -> specify what modifications to apply to the base asciiart " \
         + "(seperated by \n" \
-          "        a plus sign, start with the ones that do the most changes " 
-          + "first)")
+          "        a plus sign starting with the most invasive ones first)")
     print("  -n -> toggle word wrapping")
     print("  -w [number] -> set the width for word wrapping")
     #print("  -f force")
