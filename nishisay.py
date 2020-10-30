@@ -160,7 +160,7 @@ if textSupplied:
 
 #if no text supplied in arguments
 def usageMsg():
-    print("Usage: nishisay [option]... <text>")
+    print("Usage: nishisay [options] <text>")
     print("This program comes with " + chr(0x1B) + "[38;5;196mABSOLUTELY NO" \
         + "WARRANTY" + chr(0x1B) + "[39m, to the extent permitted by "\
         + "\napplicable law.")

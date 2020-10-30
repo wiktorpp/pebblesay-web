@@ -1,8 +1,5 @@
-To install this program open terminal, navigate to the folder you have 
-downloaded and unpacked this repo in and type:
+To install this program open terminal and run:
 
-    sudo cp nishisay /usr/bin
-    sudo chmod +x /usr/bin/nishisay
-    sudo chmod 777 /usr/bin/nishisay
+    bash install.sh install
 
 The original drawing was drawn by Nishi (Julia). Thx for letting me use it ^^
