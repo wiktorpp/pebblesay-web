@@ -258,11 +258,11 @@ for i in range(0, width):
     stdout.write('¯')
 stdout.write("¯ ")
 if not think:
-    stdout.write("\\ " + asciiart[2] + "\n" + \
-                 spacing + "     \\" + asciiart[3] + "\n")
+    stdout.write("\\ " + asciiart[2] + "\n")
+    stdout.write(spacing + "     \\" + asciiart[3] + "\n")
 else:
-    stdout.write("o " + asciiart[2] + "\n" + \
-                 spacing + "     o" + asciiart[3] + "\n")
+    stdout.write("o " + asciiart[2] + "\n")
+    stdout.write(spacing + "     o" + asciiart[3] + "\n")
 
 #printing rest of asciiart
 for i in range(4,len(asciiart)):
