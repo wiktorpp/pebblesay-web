@@ -57,15 +57,15 @@ mods = {
              "*",
              "*",
              "*",
-             "  / | U   U | /",
+             "  / | U   U | /"
     ],
     "ono" : [
                    "*",
                    "*",
                    "*",
                    "  / | O   O | /",
-             "        | \\ ░ n ░/  |",
-    ],
+             "        | \\ ░ n ░/  |"
+    ]
 }
 maxWidth = 35
 
@@ -137,18 +137,22 @@ if textSupplied and not "\\n" in " ".join(argv[textOffset:]):
 
 #configuring asciiart
 asciiart = baseAsciiart
-try: modsEnabled
+try: 
+    modsEnabled
 except:
     pass
 else:
     for modName in modsEnabled:
         mod = mods.get(modName)
         lineIndex = 0
-        for line in mod:
-            if line != "*":
-                #replacing line with the mod
-                asciiart[lineIndex] = line
-            lineIndex +=1
+        if mod != None:
+            for line in mod:
+                if line != "*":
+                    #replacing line with the mod
+                    asciiart[lineIndex] = line
+                lineIndex +=1
+        else:
+            print("Error: Invalid mod name " + modName + ".")
 
 ###############
 #fetching text#
