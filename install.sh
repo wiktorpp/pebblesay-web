@@ -15,7 +15,8 @@ else
             fi
         elif [ "$1" = "link" ]; then
             cp nishisay.py nishisay
-            echo -e "\n# adding the folder containing nishisay to the \$PATH variable. \nexport PATH=\$PATH\":$SCRIPTPATH\"" >> ~/.bashrc
+            printf "\n# adding the folder containing nishisay to the \$PATH variable.\n" >> ~/.bashrc
+            printf "export PATH=\$PATH\":$SCRIPTPATH\"" >> ~/.bashrc
             echo "Please reopen your terminal window."
         else
             echo "Error: Wrong argument."
