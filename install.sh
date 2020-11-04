@@ -16,6 +16,7 @@ else
         elif [ "$1" = "link" ]; then
             cp nishisay.py nishisay
             echo "\nexport PATH=\$PATH\":$SCRIPTPATH\"" >> ~/.bashrc
+            echo "Please reopen your terminal window."
         else
             echo "Error: Wrong argument."
         fi
