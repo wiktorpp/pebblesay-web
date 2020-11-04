@@ -2,7 +2,7 @@
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=$(dirname $SCRIPT)
 if [ $# -eq 0 ]; then 
-    echo "Usage: install.sh <install | purge>"
+    echo "Usage: install.sh <install | purge | link>"
 else
     if [ -w /usr/bin ] || [ "$1" = "temp" ]; then
         if [ "$1" = "install" ]; then
@@ -13,6 +13,9 @@ else
             if rm /usr/bin/nishisay; then
                 echo "Uninstalled successfully."
             fi
+        elif [ "$1" = "link" ]; then
+            cp nishisay.py nishisay
+            echo "\nexport PATH=\$PATH\":$SCRIPTPATH\"" >> ~/.bashrc
         else
             echo "Error: Wrong argument."
         fi
