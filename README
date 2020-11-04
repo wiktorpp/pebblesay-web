@@ -2,6 +2,6 @@ To install this program open terminal and type:
 
     git clone https://github.com/wiktorpp/nishisay.git
     cd nishisay/
-    bash install.sh install
+    sh install.sh install
 
 The original drawing was drawn by Nishi (Julia). Thx for letting me use it ^^
