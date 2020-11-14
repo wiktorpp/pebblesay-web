@@ -239,19 +239,19 @@ stdout.write("_")
 
 #printing one line of text
 if len(text) == 1:
-    stdout.write("   " + asciiart[0] + "\n")
-    stdout.write("< " + text[0] + " >  " + asciiart[1] + "\n")
+    stdout.write("   {}\n".format(asciiart[0]))
+    stdout.write("< {} >  {}\n".format(text[0], asciiart[1]))
 
 #printing multiple lines of text
 elif len(text) > 1:
     stdout.write("\n")
     for i in range(0, len(text)):
         if i == 0:
-            stdout.write("/ " + text[0].ljust(width)  + " \\  ")
+            stdout.write("/ {} \\  ".format(text[0].ljust(width)))
         elif len(text) - i == 1:
-            stdout.write("\\ " + text[i].ljust(width)  + " /  ")
+            stdout.write("\\ {} /  ".format(text[i].ljust(width)))
         else:
-            stdout.write("│ " + text[i].ljust(width)  + " │  ")
+            stdout.write("│ {} │  ".format(text[i].ljust(width)))
 
         #printing asciiart
         if len(text) - i == 2:
@@ -269,12 +269,12 @@ for i in range(0, width):
     stdout.write('¯')
 stdout.write("¯ ")
 if not think:
-    stdout.write("\\ " + asciiart[2] + "\n")
-    stdout.write(spacing + "     \\" + asciiart[3] + "\n")
+    stdout.write("\\ {}\n".format(asciiart[2]))
+    stdout.write(spacing + "     \\{}\n".format(asciiart[3]))
 else:
-    stdout.write("o " + asciiart[2] + "\n")
-    stdout.write(spacing + "     o" + asciiart[3] + "\n")
+    stdout.write("o {}\n".format(asciiart[2]))
+    stdout.write(spacing + "     o{}\n".format(asciiart[3]))
 
 #printing rest of asciiart
-for i in range(4,len(asciiart)):
+for i in range(4, len(asciiart)):
     stdout.write(spacing + asciiart[i] + "\n")
