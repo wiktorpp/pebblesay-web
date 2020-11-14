@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "-> nishisay test test test"
+echo "-> nishisay test test test..."
 nishisay test test test test test test test test test test test test test test test test
 
 echo "-> cat loremIpsum.txt | nishisay -n"
@@ -10,8 +10,8 @@ figlet test | nishisay
 
 echo "-> nishisay -c XD"
 nishisay -c XD
-echo "-> nishisay -n \"Hi, \\nhow are you?hhhhhhhhhhhhhhhhhhhhhhhhhh\""
-nishisay -n "Hi, \nhow are you?hhhhhhhhhhhhhhhhhhhhhhhhhh"
+echo "-> nishisay -nt \"Hi, \\nhow are you? AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\""
+nishisay -nt "Hi, \nhow are you? AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 
 echo "-> nishisay"
 nishisay
