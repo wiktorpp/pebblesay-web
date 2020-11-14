@@ -124,7 +124,7 @@ for i in argv[1:]:
     if "f" in i:
         force = True
     if "c" in i:
-        colorDisabled = True
+        modsEnabled.append("imgNoColor")
 
     if "w" in i:
         nextIterWidth = True
