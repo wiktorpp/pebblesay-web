@@ -22,6 +22,10 @@ else
             echo "Error: Wrong argument."
         fi
     else
-        sudo sh $SCRIPT $1
+        if command -v sudo > /dev/null; then
+            sudo sh $SCRIPT $1
+        else
+            su -c sh $SCRIPT $1
+        fi
     fi
 fi
