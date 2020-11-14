@@ -14,7 +14,7 @@ else
                 echo "Uninstalled successfully."
             fi
         elif [ "$1" = "link" ]; then
-            cp nishisay.py nishisay
+            ln nishisay.py nishisay
             printf "\n# adding the folder containing nishisay to the \$PATH variable.\n" >> ~/.bashrc
             printf "export PATH=\$PATH\":$SCRIPTPATH\"" >> ~/.bashrc
             echo "Please reopen your terminal window."
