@@ -25,7 +25,7 @@ else
         if command -v sudo > /dev/null; then
             sudo sh $SCRIPT $1
         else
-            su -c sh $SCRIPT $1
+            su -c "sh $SCRIPT $1"
         fi
     fi
 fi
