@@ -6,16 +6,16 @@ if [ $# -eq 0 ]; then
 else
     if [ -w /usr/bin ] || [ "$1" = "link" ]; then
         if [ "$1" = "install" ]; then
-            if cp ${SCRIPTPATH}/nishisay.py /usr/bin/nishisay; then
+            if cp ${SCRIPTPATH}/pebblesay.py /usr/bin/pebblesay; then
                 echo "Installed successfully."
             fi
         elif [ "$1" = "purge" ]; then
-            if rm /usr/bin/nishisay; then
+            if rm /usr/bin/pebblesay; then
                 echo "Uninstalled successfully."
             fi
         elif [ "$1" = "link" ]; then
-            ln nishisay.py nishisay
-            printf "\n# adding the folder containing nishisay to the \$PATH variable.\n" >> ~/.bashrc
+            ln pebblesay.py pebblesay
+            printf "\n# adding the folder containing pebblesay to the \$PATH variable.\n" >> ~/.bashrc
             printf "export PATH=\$PATH\":$SCRIPTPATH\"" >> ~/.bashrc
             echo "Please reopen your terminal window."
         else
