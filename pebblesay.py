@@ -171,7 +171,7 @@ if textSupplied:
 
 #if no text supplied in arguments
 def usageMsg():
-    print("Usage: nishisay [option]... [-m \033[4mmods\033[0m] " + \
+    print("Usage: pebblesay [option]... [-m \033[4mmods\033[0m] " + \
         "[\033[4mmessage\033[0m]")
     print("This program comes with " + chr(0x1B) + "[38;5;196mABSOLUTELY NO " \
         + "WARRANTY" + chr(0x1B) + "[39m, to the extent permitted by "\
@@ -187,11 +187,11 @@ def usageMsg():
     print("  -c -> disable color (todo)")
     print("  -p -> force reading from pipe")
     print("Usage examples:")
-    print("  -> nishisay XD")
-    print("  -> figlet XD | nishisay")
-    print("  -> nishisay -m uwu uwu")
-    print("  -> cat file.txt | nishisay -n")
-    print('  -> nishisay "Hi, \\nhow are you?"')
+    print("  -> pebblesay XD")
+    print("  -> figlet XD | pebblesay")
+    print("  -> pebblesay -m uwu uwu")
+    print("  -> cat file.txt | pebblesay -n")
+    print('  -> pebblesay "Hi, \\nhow are you?"')
     _exit(0)
 
 if not textSupplied and not forcePipe:
