@@ -87,10 +87,7 @@ think = False
 #########################
 
 #wrapping text
-textTmp = text
-text = []
-for i in textTmp:
-    text.extend(wrap(i, width))
+text = wrap(text, width)
 
 #calculating width
 width = max(len(i) for i in text)
