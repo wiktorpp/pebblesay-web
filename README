@@ -1,9 +1,3 @@
 !!!DEPRECATED!!!
 
-To install this program open terminal and type:
-
-    git clone https://github.com/wiktorpp/pebblesay.git
-    cd pebblesay/
-    sh install.sh install
-
 The original drawing was drawn by Nishi (Julia). Thx for letting me use it ^^

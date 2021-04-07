@@ -5,16 +5,16 @@
 #importing liblaries#
 #####################
 
-from sys import *
 from os import *
 from threading import Timer
 from textwrap import wrap
+from browser import *
 
 ############################
 #declaring static variables#
 ############################
 
-baseAsciiart = [
+asciiart = [
                       "     /|_   ___/|",
                       "    / __\\_/    |",
                       "   | /     \\   >",
@@ -74,155 +74,23 @@ mods = {
              "        | \\ ░ W ░/  |"
     ]
 }
-maxWidth = 35
+width = 35
 
-#################
-#setting options#
-#################
 
-#determining options
-forcePipe = think = wrapping = force = colorDisabled = False
-nextIterWidth = nextIterMod = False
-textSupplied = False
-textOffset = 1
-modsEnabled = []
-for i in argv[1:]:
 
-    #setting width
-    if nextIterWidth:
-        if i == "0":
-            print("Error: Width can't be set to 0.")
-            continue
-        try:
-            width = int(i)
-        except:
-            print("Error: Width value incorrect.")
-            continue
-        wrapping = True
+text = document["input"].value
+think = False
 
-        nextIterWidth = False
-        textOffset += 1
-        continue
-
-    if nextIterMod:
-        modsEnabled.extend(i.split("+"))
-        nextIterMod = False
-        textOffset += 1
-        continue
-
-    #stopping at the end of options
-    if not i.startswith("-") and not nextIterWidth:
-        textSupplied = True
-        break
-
-    if "p" in i:
-        forcePipe = True
-    if "t" in i:
-        think = True
-    if "n" in i:
-        wrapping = True
-    if "f" in i:
-        force = True
-    if "c" in i:
-        modsEnabled.append("imgNoColor")
-
-    if "w" in i:
-        nextIterWidth = True
-    if "m" in i:
-        nextIterMod = True
-
-    textOffset += 1
-
-#setting width to max if not specified
-try: width
-except:
-    width = maxWidth
-
-#turning on text wrapping if text supplied as argument
-if textSupplied and not "\\n" in " ".join(argv[textOffset:]):
-    wrapping = True
-
-#configuring asciiart
-asciiart = baseAsciiart
-try: 
-    modsEnabled
-except:
-    pass
-else:
-    for modName in modsEnabled:
-        mod = mods.get(modName)
-        lineIndex = 0
-        if mod != None:
-            for line in mod:
-                if line != "*":
-                    #replacing line with the mod
-                    asciiart[lineIndex] = line
-                lineIndex +=1
-        else:
-            print("Error: Invalid mod name " + modName + ".")
-
-###############
-#fetching text#
-###############
-
-#fetching text from arguments
-if textSupplied:
-    text = " ".join(argv[textOffset:]).split("\\n")
-
-#if no text supplied in arguments
-def usageMsg():
-    print("Usage: pebblesay [option]... [-m \033[4mmods\033[0m] " + \
-        "[\033[4mmessage\033[0m]")
-    print("This program comes with " + chr(0x1B) + "[38;5;196mABSOLUTELY NO " \
-        + "WARRANTY" + chr(0x1B) + "[39m, to the extent permitted by "\
-        + "\napplicable law.")
-    print("Options:")
-    print("  -t -> think")
-    print("  -m -> specify what modifications to apply to the base asciiart " \
-        + "(seperated by \n" \
-          "        a plus sign starting with the most invasive ones first)")
-    print("  -n -> toggle word wrapping")
-    print("  -w [number] -> set the width for word wrapping")
-    #print("  -f force")
-    print("  -c -> disable color (todo)")
-    print("  -p -> force reading from pipe")
-    print("Usage examples:")
-    print("  -> pebblesay XD")
-    print("  -> figlet XD | pebblesay")
-    print("  -> pebblesay -m uwu uwu")
-    print("  -> cat file.txt | pebblesay -n")
-    print('  -> pebblesay "Hi, \\nhow are you?"')
-    _exit(0)
-
-if not textSupplied and not forcePipe:
-    #prinring usage message after a set time (I am so fucking smart :3)
-    usageMsgTimer = Timer(0.1, usageMsg)
-    usageMsgTimer.start()
-    #awaiting for text on stdin (peek() is blocking) and cancelling timer asap
-    stdin.buffer.peek(1)
-    usageMsgTimer.cancel()
-    text = stdin.read().splitlines()
-
-#-p specified
-if forcePipe:
-    text = stdin.read().splitlines()
 
 #########################
 #parsing text (wrapping)#
 #########################
 
-#checking if text supplied
-if not force:
-    if (len(text) == 1 and (text[0] == "" or text[0] == " ")) or len(text) == 0:
-        print("Error: No text Supplied.")
-        _exit(1)
-
 #wrapping text
-if wrapping:
-    textTmp = text
-    text = []
-    for i in textTmp:
-        text.extend(wrap(i, width))
+textTmp = text
+text = []
+for i in textTmp:
+    text.extend(wrap(i, width))
 
 #calculating width
 width = max(len(i) for i in text)
@@ -232,49 +100,57 @@ width = max(len(i) for i in text)
 ####################
 
 #printing top line
-stdout.write(" _")
+document["output"].attach(" _".replace(" ", "\u2800"))
 for i in range(0, width):
-    stdout.write('_')
-stdout.write("_")
+    document["output"].attach('_')
+document["output"].attach("_")
 
 #printing one line of text
 if len(text) == 1:
-    stdout.write("   {}\n".format(asciiart[0]))
-    stdout.write("< {} >  {}\n".format(text[0], asciiart[1]))
+    document["output"].attach("   {}".format(asciiart[0]).replace(" ", "\u2800"))
+    document["output"].attach(html.BR())
+    document["output"].attach("< {} >  {}".format(text[0], asciiart[1]).replace(" ", "\u2800"))
+    document["output"].attach(html.BR())
 
 #printing multiple lines of text
 elif len(text) > 1:
-    stdout.write("\n")
+    document["output"].attach("")
+    document["output"].attach(html.BR())
     for i in range(0, len(text)):
         if i == 0:
-            stdout.write("/ {} \\  ".format(text[0].ljust(width)))
+            document["output"].attach("/ {} \\  ".format(text[0].ljust(width)).replace(" ", "\u2800"))
         elif len(text) - i == 1:
-            stdout.write("\\ {} /  ".format(text[i].ljust(width)))
+            document["output"].attach("\\ {} /  ".format(text[i].ljust(width)).replace(" ", "\u2800"))
         else:
-            stdout.write("│ {} │  ".format(text[i].ljust(width)))
+            document["output"].attach("│ {} │  ".format(text[i].ljust(width)).replace(" ", "\u2800"))
 
         #printing asciiart
         if len(text) - i == 2:
-            stdout.write(asciiart[0])
+            document["output"].attach(asciiart[0].replace(" ", "\u2800"))
         elif len(text) - i == 1:
-            stdout.write(asciiart[1])
+            document["output"].attach(asciiart[1].replace(" ", "\u2800"))
 
-        stdout.write("\n")
+        document["output"].attach("")
+        document["output"].attach(html.BR())
 
 spacing = " " * width
 
 #printing bottom line
-stdout.write(" ¯")
+document["output"].attach(" ¯".replace(" ", "\u2800"))
 for i in range(0, width):
-    stdout.write('¯')
-stdout.write("¯ ")
+    document["output"].attach('¯'.replace(" ", "\u2800"))
+document["output"].attach("¯ ".replace(" ", "\u2800"))
 if not think:
-    stdout.write("\\ {}\n".format(asciiart[2]))
-    stdout.write(spacing + "     \\{}\n".format(asciiart[3]))
+    document["output"].attach("\\ {}".format(asciiart[2]).replace(" ", "\u2800"))
+    document["output"].attach(html.BR())
+    document["output"].attach((spacing + "     \\{}".format(asciiart[3])).replace(" ", "\u2800"))
+    document["output"].attach(html.BR())
 else:
-    stdout.write("o {}\n".format(asciiart[2]))
-    stdout.write(spacing + "     o{}\n".format(asciiart[3]))
+    document["output"].attach("o {}".format(asciiart[2]).replace(" ", "\u2800"))
+    document["output"].attach((spacing + "     o{}".format(asciiart[3])).replace(" ", "\u2800"))
+    document["output"].attach(html.BR())
 
 #printing rest of asciiart
 for i in range(4, len(asciiart)):
-    stdout.write(spacing + asciiart[i] + "\n")
+    document["output"].attach((spacing + asciiart[i] + "").replace(" ", "\u2800"))
+    document["output"].attach(html.BR())
