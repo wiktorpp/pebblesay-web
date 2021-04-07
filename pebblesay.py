@@ -151,4 +151,4 @@ for i in range(4, len(asciiart)):
 
 print(output)
 
-document["output"].attach(html.CODE(output.replace(" ", " ")))
+document["output"].attach(html.CODE(html.H6(output.replace(" ", " "))))
