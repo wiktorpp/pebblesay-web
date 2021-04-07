@@ -149,4 +149,6 @@ else:
 for i in range(4, len(asciiart)):
     output += spacing + asciiart[i] + "<br>"
 
-document["output"].attach(html.CODE(output.replace(" ", "\u2800")))
+print(output)
+
+document["output"].attach(html.CODE(output.replace(" ", " ")))
