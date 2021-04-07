@@ -78,7 +78,7 @@ width = 35
 
 
 
-text = document["input"].value
+text = document["input"].value.split("\n")
 think = False
 
 
@@ -87,7 +87,11 @@ think = False
 #########################
 
 #wrapping text
-text = wrap(text, width)
+textTmp = text
+text = []
+for i in textTmp:
+    text.extend(wrap(i, width))
+print(text)
 
 #calculating width
 width = max(len(i) for i in text)
