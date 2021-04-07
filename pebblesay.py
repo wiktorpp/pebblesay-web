@@ -78,7 +78,7 @@ width = 35
 
 
 
-text = document["input"].value.split("<br>")
+text = document["input"].value.split("\n")
 think = False
 
 
