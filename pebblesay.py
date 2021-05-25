@@ -86,68 +86,57 @@ think = False
 #########################
 
 #wrapping text
-textTmp = text
-text = []
-for i in textTmp:
-    text.extend(wrap(i, width))
-print(text)
+textWrapped = []
+for i in text:
+    textWrapped.extend(wrap(i, 35))
+text=textWrapped
 
 #calculating width
-width = max(len(i) for i in text)
+textWidth = max(len(i) for i in text)
+textHeight = len(text)
 
-####################
-#printing (finally)#
-####################
-output = ""
+##########
+#printing#
+##########
+output = []
 
-#printing top line
-output += " _"
-for i in range(0, width):
-    output += '_'
-output += "_"
+#generating top line
+output.append(f" {'_' * (textWidth + 2)}   ")
 
-#printing one line of text
-if len(text) == 1:
-    output += "   {}<br>".format(asciiart[0])
-    output += "< {} >  {}<br>".format(text[0], asciiart[1])
+#one line of text
+if textHeight == 1:
+    output.append(f"< {text[0]} >  ")
 
-#printing multiple lines of text
-elif len(text) > 1:
-    output += "<br>"
-    for i in range(0, len(text)):
-        if i == 0:
-            output += "/ {} \\  ".format(text[0].ljust(width))
-        elif len(text) - i == 1:
-            output += "\\ {} /  ".format(text[i].ljust(width))
-        else:
-            output += "│ {} │  ".format(text[i].ljust(width))
-
-        #printing asciiart
-        if len(text) - i == 2:
-            output += asciiart[0]
-        elif len(text) - i == 1:
-            output += asciiart[1]
-
-        output += "<br>"
-
-spacing = " " * width
-
-#printing bottom line
-output += " ¯"
-for i in range(0, width):
-    output += '¯'
-output += "¯ "
-if not think:
-    output += "\\ {}<br>".format(asciiart[2])
-    output += spacing + "     \\{}<br>".format(asciiart[3])
+#multiple lines of text
 else:
-    output += "o {}<br>".format(asciiart[2])
-    output += spacing + "     o{}<br>".format(asciiart[3])
+    for i, line in enumerate(text):
+        if i == 0:
+            output.append(f"/ {line.ljust(textWidth)} \\  ")
+        elif textHeight - i == 1:
+            output.append(f"\\ {line.ljust(textWidth)} /  ")
+        else:
+            output.append(f"│ {line.ljust(textWidth)} │  ")
 
-#printing rest of asciiart
-for i in range(4, len(asciiart)):
-    output += spacing + asciiart[i] + "<br>"
+spacing = " " * textWidth
 
-print(output)
+#creating bottom line and the tail
+tailChar = "\\"
+output.append(f" {'¯' * (textWidth + 2)} {tailChar} ")
+output.append(f"{spacing}     {tailChar}")
 
-document["output"].attach(html.CODE(html.H6(output.replace(" ", " "))))
+output = [f"{bubbleLine}{asciiartLine}" for bubbleLine, asciiartLine in 
+    zip(
+        output, 
+        ["" for _ in range(textHeight + 3 - 4)] + asciiart[:4]
+    )
+]
+
+#appending the rest of asciiart
+for line in asciiart[4:]:
+    output.append(f"{spacing}{line}")
+
+print("\n".join(output))
+
+#document["output"].attach(html.CODE(html.H6(output.replace(" ", " "))))
+for line in output:
+    window.term.writeln(line)
